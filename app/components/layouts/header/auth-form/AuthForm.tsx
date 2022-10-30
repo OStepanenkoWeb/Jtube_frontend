@@ -1,8 +1,11 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { FaUserCircle } from 'react-icons/fa'
 
+import { validEmail } from '@/components/layouts/header/auth-form/auth.constants'
 import { IAuthFields } from '@/components/layouts/header/auth-form/auth.inerface'
+import BaseButton from '@/components/ui/buttons/BaseButton/BaseButton'
+import BaseInput from '@/components/ui/fields/BaseInput/BaseInput'
 
 import { useOutside } from '@/hooks/useOutside'
 
@@ -13,10 +16,10 @@ import styles from './AuthForm.module.scss'
 const AuthForm: FC = () => {
 	const { ref, isShow, setIsShow } = useOutside(false)
 
-	// const [type, setType] = useState<'login' | 'register'>('login')
+	const [type, setType] = useState<'login' | 'register'>('login')
 	// const { isLoading } = useAuth()
 	const {
-		// register,
+		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm<IAuthFields>({
@@ -32,7 +35,39 @@ const AuthForm: FC = () => {
 			</button>
 
 			{isShow && (
-				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}></form>
+				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+					<BaseInput
+						{...register('email', {
+							required: 'Поле E-mail обязательно к заполнению!',
+							pattern: {
+								value: validEmail,
+								message: 'Указан не верный формат email!'
+							}
+						})}
+						placeholder='E-mail'
+						error={errors.email}
+					/>
+					<BaseInput
+						{...register('password', {
+							required: 'Поле Пароль обязательно к заполнению!',
+							minLength: {
+								value: 6,
+								message: 'Пароль должен содержать не менее 6 символов!'
+							}
+						})}
+						placeholder='Пароль'
+						error={errors.password}
+					/>
+					<div className={styles.button}>
+						<BaseButton onClick={() => setType('login')}>Войти</BaseButton>
+					</div>
+					<button
+						className={styles.register}
+						onClick={() => setType('register')}
+					>
+						Регистрация
+					</button>
+				</form>
 			)}
 		</div>
 	)
