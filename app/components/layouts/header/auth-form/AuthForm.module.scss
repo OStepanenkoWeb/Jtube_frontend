@@ -6,6 +6,10 @@
 		top: calc(100% + 1.4rem);
 		background-color: #272532;
 
+		.button {
+			@apply mt-20 mb-1 text-center;
+		}
+
 		.register {
 			@apply text-gray-400 opacity-40 block text-center w-full;
 		}
