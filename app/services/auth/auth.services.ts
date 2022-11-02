@@ -9,6 +9,7 @@ export const AuthServices = {
 			email,
 			password
 		})
+		console.log(URL_LOGIN)
 
 		return response.data
 	},
