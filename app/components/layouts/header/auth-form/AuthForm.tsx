@@ -7,17 +7,25 @@ import { IAuthFields } from '@/components/layouts/header/auth-form/auth.inerface
 import BaseButton from '@/components/ui/buttons/BaseButton/BaseButton'
 import BaseInput from '@/components/ui/fields/BaseInput/BaseInput'
 
+import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
 import { useOutside } from '@/hooks/useOutside'
 
 import stylesIcon from '../icons-header/IconsHeader.module.scss'
 
 import styles from './AuthForm.module.scss'
 
+const LOGIN_MODE = 'login'
+const REGISTER_MODE = 'register'
+
 const AuthForm: FC = () => {
 	const { ref, isShow, setIsShow } = useOutside(false)
 
-	const [type, setType] = useState<'login' | 'register'>('login')
-	// const { isLoading } = useAuth()
+	const [type, setType] = useState<typeof LOGIN_MODE | typeof REGISTER_MODE>(
+		LOGIN_MODE
+	)
+	const { login, register: registerAction } = useActions()
+	const { isLoading } = useAuth()
 	const {
 		register,
 		formState: { errors },
@@ -26,7 +34,10 @@ const AuthForm: FC = () => {
 		mode: 'onChange'
 	})
 
-	const onSubmit: SubmitHandler<IAuthFields> = data => {}
+	const onSubmit: SubmitHandler<IAuthFields> = data => {
+		if (type === LOGIN_MODE) login(data)
+		else if (type === REGISTER_MODE) registerAction(data)
+	}
 
 	return (
 		<div className={styles.wrapper} ref={ref}>
@@ -59,11 +70,17 @@ const AuthForm: FC = () => {
 						error={errors.password}
 					/>
 					<div className={styles.button}>
-						<BaseButton onClick={() => setType('login')}>Войти</BaseButton>
+						<BaseButton
+							onClick={() => setType(LOGIN_MODE)}
+							disabled={isLoading}
+						>
+							Войти
+						</BaseButton>
 					</div>
 					<button
 						className={styles.register}
-						onClick={() => setType('register')}
+						onClick={() => setType(REGISTER_MODE)}
+						disabled={isLoading}
 					>
 						Регистрация
 					</button>
