@@ -24,6 +24,13 @@ export const api = createApi({
 		getProfile: builder.query<IUser, any>({
 			query: () => `${USER}/profile`,
 			providesTags: () => [{ type: 'Profile' }]
+		}),
+		subscribeToChannel: builder.mutation<boolean, number>({
+			query: channelId => ({
+				url: `${USER}/subscribe/${channelId}`,
+				method: 'POST'
+			}),
+			invalidatesTags: () => [{ type: 'Profile' }]
 		})
 	})
 })
