@@ -1,7 +1,36 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import { HiUpload } from 'react-icons/hi'
+
+import { videoApi } from '@/store/api/video.api'
+
+import stylesIcon from '../icons-header/IconsHeader.module.scss'
 
 const UploadVideo: FC = () => {
-	return <div>UploadVideo</div>
+	const [isOpen, setIsOpen] = useState(false)
+	const [videoId, setVideoId] = useState<number>(0)
+
+	const [createVideo, { isLoading }] = videoApi.useCreateVideoMutation()
+
+	const addVideoHandler = () => {
+		createVideo()
+			.unwrap()
+			.then(id => {
+				setVideoId(Number(id))
+				setIsOpen(true)
+			})
+	}
+
+	return (
+		<>
+			<button
+				className={stylesIcon.button}
+				disabled={isLoading}
+				onClick={addVideoHandler}
+			>
+				<HiUpload />
+			</button>
+		</>
+	)
 }
 
 export default UploadVideo

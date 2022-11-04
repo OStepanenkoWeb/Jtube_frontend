@@ -6,6 +6,8 @@ import {
 	URL_GET_VIDEO_POPULAR
 } from '../../configs/url.config'
 
+export const VIDEO = 'video'
+
 export const VideoServices = {
 	async getAll() {
 		return await axiosApi.get<IVideo[]>(URL_GET_VIDEOS_ALL)
