@@ -23,7 +23,7 @@ const UploadVideo: FC = () => {
 	return (
 		<>
 			<button
-				className={stylesIcon.button}
+				className={stylesIcon.buttons}
 				disabled={isLoading}
 				onClick={addVideoHandler}
 			>
