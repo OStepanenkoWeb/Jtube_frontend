@@ -7,11 +7,11 @@ export interface IVideo extends IBase {
 
 	isPublic: boolean
 
-	viewsCount?: number
+	viewsCount: number
 
-	likesCount?: number
+	likesCount: number
 
-	durations?: number
+	durations: number
 
 	description: string
 
