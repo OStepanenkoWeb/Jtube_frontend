@@ -24,6 +24,8 @@ const LargeVideoItem: FC<ILargeVideoItem> = ({ video }) => {
 						src={video.thumbnailPath}
 						alt={video.name}
 						className={styles['bg-image']}
+						width={185}
+						height={103}
 						priority
 					/>
 				)}
@@ -34,11 +36,11 @@ const LargeVideoItem: FC<ILargeVideoItem> = ({ video }) => {
 						<a className={styles.name}>{video.name}</a>
 					</Link>
 
-					{video?.author?.avatarPath && (
+					{video.author?.avatarPath && (
 						<UserAvatar user={video.author} isWhite />
 					)}
 
-					<div className={styles.author}>{video.author.name}</div>
+					<div className={styles.author}>{video.author?.name || ''}</div>
 
 					<VideoStatistics
 						views={video.viewsCount}
