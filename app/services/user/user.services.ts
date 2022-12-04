@@ -10,6 +10,6 @@ export const UserServices = {
 		return await axiosApi.get<IUser[]>(URL_GET_USERS_ALL)
 	},
 	async getUser(id: number) {
-		return await axiosApi.get<IUser[]>(URL_GET_USER_BY_ID(id))
+		return await axiosApi.get<IUser>(URL_GET_USER_BY_ID(id))
 	}
 }
