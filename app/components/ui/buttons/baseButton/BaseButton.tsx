@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 
-import { IButton } from '@/components/ui/buttons/BaseButton/button.interface'
+import { IButton } from '@/components/ui/buttons/baseButton/button.interface'
 
 import styles from './BaseButton.module.scss'
 
