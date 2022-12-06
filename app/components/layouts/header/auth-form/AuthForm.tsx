@@ -4,7 +4,7 @@ import { FaUserCircle } from 'react-icons/fa'
 
 import { validEmail } from '@/components/layouts/header/auth-form/auth.constants'
 import { IAuthFields } from '@/components/layouts/header/auth-form/auth.inerface'
-import BaseButton from '@/components/ui/buttons/BaseButton/BaseButton'
+import BaseButton from '@/components/ui/buttons/baseButton/BaseButton'
 import BaseInput from '@/components/ui/fields/BaseInput/BaseInput'
 
 import { useActions } from '@/hooks/useActions'
