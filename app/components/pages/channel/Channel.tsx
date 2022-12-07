@@ -12,7 +12,7 @@ const Channel: FC<IChannel> = ({ channel }) => {
 	return (
 		<Layout title={channel.name}>
 			<div className={styles.channel}>
-				<div className='flex items-center gap-12'>
+				<div className='flex items-center gap-10'>
 					<ChannelInfoSmall channel={channel} />
 					<SubscribeButton channelIdForSubscribe={channel.id} />
 				</div>
