@@ -4,8 +4,10 @@ import { FC } from 'react'
 
 import Layout from '@/components/layouts/Layout'
 import Comments from '@/components/pages/video/comments/Comments'
+import VideoDetail from '@/components/pages/video/video-detail/VideoDetail'
 import VideoPlayer from '@/components/pages/video/video-player/VideoPlayer'
 
+import { IUser } from '@/types/user.interface'
 import { IVideo } from '@/types/video.interface'
 
 import { videoApi } from '@/store/api/video.api'
@@ -27,7 +29,10 @@ const Video: FC = () => {
 				<VideoPlayer videoPath={video.videoPath} />
 				<Comments comments={video.comments || []} videoId={video.id} />
 			</div>
-			<div className={cn(styles.layout, 'mt-7')}></div>
+			<div className={cn(styles.layout, 'mt-7')}>
+				<VideoDetail video={video} channel={video.author || ({} as IUser)} />
+				<div></div>
+			</div>
 		</Layout>
 	)
 }
